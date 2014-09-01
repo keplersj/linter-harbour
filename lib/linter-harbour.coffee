@@ -16,7 +16,7 @@ class LinterHarbour extends Linter
 
   #test.prg(1) Error E0002  Redefinition of procedure or function 'TEST'
   #test.prg(3) Warning W0005  RETURN statement with no return value in function
-  regex: '.+\\.+(?<line>\\d+) ((?<error>Error)|(?<warning>Warning): (?<message>.+)[\\n\\r]'
+  regex: '.+\\.+(?<line>\\d+) ((?<error>Error)|(?<warning>Warning)): (?<message>.+)[\\n\\r]'
 
   constructor: (editor) ->
     super(editor)
