@@ -7,7 +7,7 @@ class LinterHarbour extends Linter
   @syntax: 'source.prg'
 
 
-  cmd: 'harbour -w3 -es1 -q0'
+  cmd: 'harbour -n -w3 -es1 -q0'
 
   linterName: 'harbour'
 
