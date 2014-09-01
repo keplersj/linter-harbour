@@ -1,6 +1,6 @@
 module.exports =
   configDefaults:
-    javaExecutablePath: null
+    harbourExecutablePath: null
 
   activate: ->
-    console.log 'activate linter-javac'
+    console.log 'activate linter-harbour'
