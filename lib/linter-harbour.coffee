@@ -2,7 +2,7 @@
 linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
 
-class LinterHarbor extends Linter
+class LinterHarbour extends Linter
   # The syntax that the linter handles. May be a string or
   # list/tuple of strings. Names should be all lowercase.
   # TODO: research if there are other java resources must be added
