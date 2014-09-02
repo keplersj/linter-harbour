@@ -4,8 +4,7 @@ Linter = require "#{linterPath}/lib/linter"
 
 class LinterHarbour extends Linter
 
-  @syntax: 'source.prg'
-
+  @syntax: 'source.harbour'
 
   cmd: 'harbour -n -w3 -es1 -q0'
 
