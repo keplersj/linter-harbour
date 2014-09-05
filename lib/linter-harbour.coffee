@@ -6,7 +6,7 @@ class LinterHarbour extends Linter
 
   @syntax: 'source.harbour'
 
-  cmd: 'harbour -n -w3 -es1 -q0'
+  cmd: 'harbour -n -s -w3 -es1 -q0'
 
   linterName: 'harbour'
 
