@@ -13,7 +13,7 @@ class LinterHarbour extends Linter
 
   #test.prg(1) Error E0002  Redefinition of procedure or function 'TEST'
   #test.prg(3) Warning W0005  RETURN statement with no return value in function
-  regex: '\\((?<line>\\d+)\\) ((?<error>Error)|(?<warning>Warning)) (?<message>.+)[\\n\\r]'
+  regex: '\\((?<line>\\d+)\\) ((?<error>Error)|(?<warning>Warning)) ((?<message>.+))[\\n\\r]'
 
   regexFlags: ''
 
@@ -29,13 +29,19 @@ class LinterHarbour extends Linter
   constructor: (editor) ->
     super(editor)
 
+    atom.config.observe 'linter-harbour.harbourExecutablePath', =>
+      @executablePath = atom.config.get 'linter-harbour.harbourExecutablePath'
+
+    atom.config.observe 'linter-harbour.harbourIncludes', =>
+      @harbourIncludes = atom.config.get 'linter-harbour.harbourIncludes'
+
+    atom.config.observe 'linter-harbour.harbourOptions', =>
+      @harbourOptions = atom.config.get 'linter-harbour.harbourOptions'
+
   # Private: get command and args for atom.BufferedProcess for execution
   getCmdAndArgs: (filePath) ->
-    @executablePath = atom.config.get 'linter-harbour.harbourExecutablePath'
     self = @
     cmd = @cmd
-    harbourIncludes = atom.config.get 'linter-harbour.harbourIncludes'
-    harbourOptions = atom.config.get 'linter-harbour.harbourOptions'
 
     # ensure we have an array
     cmd_list = if Array.isArray cmd
@@ -43,18 +49,18 @@ class LinterHarbour extends Linter
     else
       cmd.split ' '
 
-    hb_opt = if Array.isArray harbourOptions
-      harbourOptions.join( ' ' )
+    hb_opt = if Array.isArray @harbourOptions
+      @harbourOptions.join( ' ' )
     else
-      harbourOptions.split ' '
+      @harbourOptions.split ' '
 
     cmd_list = cmd_list.concat hb_opt
 
-    if harbourIncludes?
-      hb_includes_temp = if Array.isArray harbourIncludes
-        harbourIncludes.join( ' ' )
+    if @harbourIncludes?
+      hb_includes_temp = if Array.isArray @harbourIncludes
+        @harbourIncludes.join( ' ' )
       else
-        harbourIncludes.split ' '
+        @harbourIncludes.split ' '
 
       hb_includes = hb_includes_temp.map (item) ->
         stats = self._cachedStatSync item
@@ -91,6 +97,31 @@ class LinterHarbour extends Linter
       command: cmd_list[0],
       args: cmd_list.slice(1)
     }
+
+  verifyRowNumber: (row) ->
+    lastRow = @editor.getLastBufferRow()
+    row = lastRow if lastRow < row
+    row
+
+  createMessage: (match) ->
+    if match.error
+      level = 'error'
+    else if match.warning
+      level = 'warning'
+    else
+      level = @defaultLevel
+
+    return {
+      line: @verifyRowNumber( match.line ),
+      col: match.col,
+      level: level,
+      message: @formatMessage(match),
+      linter: @linterName,
+      range: @computeRange match
+    }
+
+  lineLengthForRow: (row) ->
+    return @editor.lineLengthForBufferRow( @verifyRowNumber row )
 
   destroy: ->
     atom.config.unobserve 'linter-harbour.harbourExecutablePath'

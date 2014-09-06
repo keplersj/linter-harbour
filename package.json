@@ -3,7 +3,7 @@
   "linter-package": true,
   "activationEvents": [],
   "main": "./lib/init",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/hernad/linter-harbour",
   "license": "MIT",
