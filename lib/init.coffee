@@ -1,6 +1,11 @@
+fs = require 'fs'
+
+activate = ->
+  console.log 'activate linter-harbour'
+
 module.exports =
   configDefaults:
     harbourExecutablePath: null
-
-  activate: ->
-    console.log 'activate linter-harbour'
+    harbourOptions: '-n -s -w3 -es1 -q0'
+    harbourIncludes: null
+  activate: activate
