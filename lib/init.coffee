@@ -1,5 +1,3 @@
-fs = require 'fs'
-
 activate = ->
   console.log 'activate linter-harbour'
 
