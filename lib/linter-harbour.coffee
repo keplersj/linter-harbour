@@ -86,10 +86,12 @@ class LinterHarbour extends Linter
         @harbourIncludes.split ' '
 
       hb_includes_temp = hb_includes_temp.concat hb_includes_config
-
-      hb_includes = hb_includes_temp.map (item) ->
-        stats = self._cachedStatSync item
-        return "-i#{item}" if stats.isDirectory()
+      hb_includes = []
+      for item in hb_includes_temp
+        try
+          stats = self._cachedStatSync item
+          hb_includes.push "-i#{item}" if stats.isDirectory()
+        catch e
 
       hb_includes.push "-i#{localFolder}"
       hb_includes.push "-i#{localFolder}/inc"
