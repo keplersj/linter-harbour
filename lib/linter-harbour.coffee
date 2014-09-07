@@ -3,6 +3,7 @@ linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
 path = require 'path'
 {XRegExp} = require  "#{linterPath}/node_modules/xregexp"
+fs = require 'fs'
 
 class LinterHarbour extends Linter
 
@@ -39,10 +40,26 @@ class LinterHarbour extends Linter
     atom.config.observe 'linter-harbour.harbourOptions', =>
       @harbourOptions = atom.config.get 'linter-harbour.harbourOptions'
 
+  getConfigFile: ->
+    config = {}
+    try
+      localFile = path.join atom.project.path, 'linter-harbour.json'
+      configObject = {}
+      if fs.existsSync localFile
+        configObject = fs.readFileSync localFile, 'UTF8'
+        config = JSON.parse configObject
+    catch e
+      console.log e
+    config
+
   # Private: get command and args for atom.BufferedProcess for execution
   getCmdAndArgs: (filePath) ->
     self = @
     cmd = @cmd
+
+    localFolder = path.dirname( @editor.getPath() )
+
+    config = @getConfigFile()
 
     # ensure we have an array
     cmd_list = if Array.isArray cmd
@@ -57,20 +74,26 @@ class LinterHarbour extends Linter
 
     cmd_list = cmd_list.concat hb_opt
 
+    hb_includes_config = []
+
+    if config.include?
+      hb_includes_config = config.include if Array.isArray config.include
+
     if @harbourIncludes?
       hb_includes_temp = if Array.isArray @harbourIncludes
         @harbourIncludes.join( ' ' )
       else
         @harbourIncludes.split ' '
 
+      hb_includes_temp = hb_includes_temp.concat hb_includes_config
+
       hb_includes = hb_includes_temp.map (item) ->
         stats = self._cachedStatSync item
         return "-i#{item}" if stats.isDirectory()
 
-      hb_includes.push "-i./"
-      hb_includes.push "-i./inc"
-      hb_includes.push "-i./include"
-
+      hb_includes.push "-i#{localFolder}"
+      hb_includes.push "-i#{localFolder}/inc"
+      hb_includes.push "-i#{localFolder}/include"
       cmd_list = cmd_list.concat hb_includes
 
     cmd_list.push filePath
