@@ -2,13 +2,9 @@
   "name": "linter-harbour",
   "linter-package": true,
   "main": "./lib/init",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/hernad/linter-harbour",
-  "license": "MIT",
-  "engines": {
-    "atom": ">0.50.0"
-  },
   "license": "MIT",
   "engines": {
     "atom": ">=0.110.0",
