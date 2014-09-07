@@ -4,7 +4,7 @@
   "main": "./lib/init",
   "version": "1.1.0",
   "description": "Lint harbour, using harbour compiler",
-  "repository": "https://github.com/hernad/linter-harbour",
+  "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
   "engines": {
     "atom": ">=0.110.0",
