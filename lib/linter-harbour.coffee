@@ -2,6 +2,7 @@
 linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
 path = require 'path'
+{XRegExp} = require  "#{linterPath}/node_modules/xregexp"
 
 class LinterHarbour extends Linter
 
@@ -103,6 +104,17 @@ class LinterHarbour extends Linter
     row = lastRow if lastRow < row
     row
 
+  processMessage: (message, callback) ->
+    messages = []
+    regex = XRegExp @regex, @regexFlags
+    XRegExp.forEach message, regex, (match, i) =>
+      re = /\((\d+)\)/
+      m = re.exec(match.message)
+      match.line = m[1] if m
+      messages.push(@createMessage(match))
+    , this
+    callback messages
+
   createMessage: (match) ->
     if match.error
       level = 'error'
@@ -110,12 +122,12 @@ class LinterHarbour extends Linter
       level = 'warning'
     else
       level = @defaultLevel
-
+    message = @formatMessage(match)
     return {
       line: @verifyRowNumber( match.line ),
       col: match.col,
       level: level,
-      message: @formatMessage(match),
+      message: message,
       linter: @linterName,
       range: @computeRange match
     }
