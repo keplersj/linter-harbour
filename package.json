@@ -10,6 +10,6 @@
     "atom": ">=1.0.0"
   },
   "dependencies": {
-    "language-harbour": "*"
+    "harbour": "*"
   }
 }
