@@ -7,7 +7,7 @@
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0",
+    "atom": ">=1.0.0"
   },
   "dependencies": {
     "language-harbour": "*"
