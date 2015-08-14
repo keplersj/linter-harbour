@@ -2,7 +2,7 @@
   "name": "linter-harbour",
   "linter-package": true,
   "main": "./lib/init",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
