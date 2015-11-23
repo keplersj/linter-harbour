@@ -5,9 +5,6 @@
   "description": "Lint harbour on the fly, using harbour -n -s -w3 -es1 -q0",
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
-  "activationHooks": [
-    "language-harbour:grammar-used"
-  ],
   "dependencies": {
     "atom-linter": "^3.3.6",
     "atom-package-deps": "^3.0.5"
