@@ -3,7 +3,7 @@
   "linter-package": true,
   "main": "./lib/init",
   "activationCommands": [],
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
