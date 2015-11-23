@@ -47,7 +47,7 @@ module.exports =
       lintOnFly: false
       lint: (textEditor) =>
         filePath = textEditor.getPath()
-        cwd = filePath.dirname(filePath)
+        cwd = path.dirname(filePath)
         command = @executablePath
         return Promise.resolve([]) unless command?
         parameters = []
