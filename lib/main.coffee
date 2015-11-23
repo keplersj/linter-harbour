@@ -3,10 +3,14 @@ helpers = require('atom-linter')
 
 module.exports =
   config:
+    additionalArguments:
+      title: 'Additional Arguments for harbour compiler'
+      type: 'string'
+      default: '-w3 -es1'
     executablePath:
       type: 'string'
-      title: 'harbour Executable'
-      default: 'harbour' # Let OS's $PATH handle the rest
+      title: 'harbour compiler Executable'
+      default: 'harbour'
 
   _testBin: ->
     title = 'linter-harbour: Unable to determine PHP version'
@@ -42,21 +46,31 @@ module.exports =
       lintOnFly: false
       lint: (textEditor) =>
         filePath = textEditor.getPath()
+        cwd = path.dirname(filePath)
         command = @executablePath
         return Promise.resolve([]) unless command?
         parameters = []
-        parameters.push('-n', '-s', '-w3', '-es1', '-q0')
+        parameters.push('-n', '-s', )
         text = textEditor.getText()
-        return helpers.exec(command, parameters, {stdin: text}).then (output) ->
-          # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
-          # test.prg(8) Error E0020  Incomplete statement or unbalanced delimiters
-          regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
-          messages = []
-          console.log 'output:', output
-          while((match = regex.exec(output)) isnt null)
-            messages.push
-              type: match[3]
-              filePath: filePath
-              range: helpers.rangeFromLineNumber(textEditor, match[1] - 1)
-              text: match[4]
-          messages
+
+        tempFile path.basename(filePath), text, (tmpFilePath) =>
+          params = [
+            tmpFilePath,
+            '-n',
+            '-s',
+            '-q0',
+            @additionalArguments.split(' ')...
+          ].filter((e) -> e)
+          return helpers.exec(command, params, {stream: 'stderr', cwd: cwd}).then (output) ->
+            # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
+            # test.prg(8) Error E0020  Incomplete statement or unbalanced delimiters
+            regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
+            messages = []
+            console.log 'output:', output
+            while((match = regex.exec(output)) isnt null)
+              messages.push
+                type: match[3]
+                filePath: filePath
+                range: helpers.rangeFromLineNumber(textEditor, match[1] - 1)
+                text: match[4]
+            messages
