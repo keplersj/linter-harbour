@@ -1,5 +1,5 @@
 {CompositeDisposable} = require 'atom'
-helpers = require('atom-linter')
+{exec, tempFile} = helpers = require('atom-linter')
 path = require 'path'
 
 module.exports =
@@ -62,7 +62,7 @@ module.exports =
             '-q0',
             @additionalArguments.split(' ')...
           ].filter((e) -> e)
-          return helpers.exec(command, params, {stream: 'stderr', cwd: cwd}).then (output) ->
+          return exec(command, params, {stream: 'stderr', cwd: cwd}).then (output) ->
             # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
             # test.prg(8) Error E0020  Incomplete statement or unbalanced delimiters
             regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
