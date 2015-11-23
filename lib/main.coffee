@@ -14,7 +14,8 @@ module.exports =
       '", please verify that this is the right path to harbour.'
     try
       helpers.exec(@executablePath, ['--version']).then (output) =>
-        regex = /Harbour (\d+)\.(\d+)\.(\d+)/g
+        # Harbour 3.2.0dev (r1408271619)
+        regex = /Harbour (\d+.*) /g
         if not regex.exec(output)
           atom.notifications.addError(title, {detail: message})
           @executablePath = ''

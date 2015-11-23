@@ -1,10 +1,29 @@
 {
   "name": "linter-harbour",
-  "linter-package": true,
   "main": "./lib/main",
+  "version": "5.0.2",
+  "description": "Lint harbour on the fly, using harbour -n -s -w3 -es1 -q0",
+  "repository": "https://github.com/AtomLinter/linter-harbour",
+  "license": "MIT",
   "activationHooks": [
     "language-harbour:grammar-used"
   ],
+  "dependencies": {
+    "atom-linter": "^3.3.6",
+    "atom-package-deps": "^3.0.5"
+  },
+  "devDependencies": {
+    "coffeelint": "^1.14.0",
+    "eslint": "^1.9.0",
+    "babel-eslint": "^4.1.5",
+    "eslint-config-airbnb": "latest"
+  },
+  "package-deps": [
+    "linter"
+  ],
+  "scripts": {
+    "lint": "./node_modules/.bin/coffeelint lib"
+  },
   "providedServices": {
     "linter": {
       "versions": {
@@ -12,18 +31,54 @@
       }
     }
   },
-  "version": "5.0.2",
-  "description": "Lint harbour, using harbour compiler",
-  "repository": "https://github.com/AtomLinter/linter-harbour",
-  "license": "MIT",
-  "package-deps": [
-    "linter"
-  ],
-  "dependencies": {
-    "atom-linter": "^3.3.6",
-    "atom-package-deps": "^3.0.5"
+  "eslintConfig": {
+    "extends": "airbnb/base",
+    "parser": "babel-eslint",
+    "globals": {
+      "atom": true,
+      "waitsForPromise": true
+    },
+    "env": {
+      "es6": true,
+      "node": true
+    }
   },
-  "engines": {
-    "atom": ">=1.2.0"
+  "coffeelintConfig": {
+    "max_line_length": {
+      "value": 120,
+      "level": "warn"
+    },
+    "no_empty_param_list": {
+      "level": "error"
+    },
+    "arrow_spacing": {
+      "level": "error"
+    },
+    "no_interpolation_in_single_quotes": {
+      "level": "error"
+    },
+    "no_debugger": {
+      "level": "error"
+    },
+    "prefer_english_operator": {
+      "level": "error"
+    },
+    "colon_assignment_spacing": {
+      "spacing": {
+        "left": 0,
+        "right": 1
+      },
+      "level": "error"
+    },
+    "braces_spacing": {
+      "spaces": 0,
+      "level": "error"
+    },
+    "spacing_after_comma": {
+      "level": "error"
+    },
+    "no_stand_alone_at": {
+      "level": "error"
+    }
   }
 }
