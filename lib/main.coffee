@@ -45,7 +45,7 @@ module.exports =
         command = @executablePath
         return Promise.resolve([]) unless command?
         parameters = []
-        parameters.push('-n -s -w3 -es1 -q0')
+        parameters.push('-n', '-s', '-w3', '-es1', '-q0')
         text = textEditor.getText()
         return helpers.exec(command, parameters, {stdin: text}).then (output) ->
           regex = /\\((?<line>\\d+)\\) ((?<error>Error)|(?<warning>Warning)) ((?<message>.+))[\\n\\r]/g
