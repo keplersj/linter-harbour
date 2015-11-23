@@ -48,12 +48,15 @@ module.exports =
         parameters.push('-n', '-s', '-w3', '-es1', '-q0')
         text = textEditor.getText()
         return helpers.exec(command, parameters, {stdin: text}).then (output) ->
-          regex = /\\((?<line>\\d+)\\) ((?<error>Error)|(?<warning>Warning)) ((?<message>.+))[\\n\\r]/g
+          # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
+          # test.prg(8) Error E0020  Incomplete statement or unbalanced delimiters
+          errRegex = /^(.*\.java):(\d+): ([\w \-]+): (.+)/
+          regex = /([\w.]+)[(](\d+)[)]  (Error)|Warning) ([\w\d]+) (.+)/g
           messages = []
           while((match = regex.exec(output)) isnt null)
             messages.push
-              type: "Error"
+              type: match[2]
               filePath: filePath
-              range: helpers.rangeFromLineNumber(textEditor, match[2] - 1)
-              text: match[1]
+              range: helpers.rangeFromLineNumber(textEditor, match[0] - 1)
+              text: match[3]
           messages
