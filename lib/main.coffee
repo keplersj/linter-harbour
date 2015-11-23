@@ -52,7 +52,7 @@ module.exports =
           # test.prg(8) Error E0020  Incomplete statement or unbalanced delimiters
           regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
           messages = []
-          console.log(output)
+          console.log 'output:', output
           while((match = regex.exec(output)) isnt null)
             messages.push
               type: match[3]
