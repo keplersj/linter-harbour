@@ -1,5 +1,6 @@
 {CompositeDisposable} = require 'atom'
 helpers = require('atom-linter')
+path = require 'path'
 
 module.exports =
   config:
@@ -46,7 +47,7 @@ module.exports =
       lintOnFly: false
       lint: (textEditor) =>
         filePath = textEditor.getPath()
-        cwd = path.dirname(filePath)
+        cwd = filePath.dirname(filePath)
         command = @executablePath
         return Promise.resolve([]) unless command?
         parameters = []
