@@ -36,7 +36,7 @@ module.exports =
   provideLinter: ->
     provider =
       name: 'harbour'
-      grammarScopes: [ 'source.harbour']
+      grammarScopes: [ 'source.harbour', 'source.hb' ]
       scope: 'file'
       lintOnFly: false
       lint: (textEditor) =>

@@ -5,6 +5,13 @@
   "activationHooks": [
     "language-harbour:grammar-used"
   ],
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
   "version": "5.0.1",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/AtomLinter/linter-harbour",
