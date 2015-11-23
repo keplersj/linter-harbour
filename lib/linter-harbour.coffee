@@ -32,7 +32,7 @@ class LinterHarbour extends Linter
     super(editor)
 
     atom.config.observe 'linter-harbour.harbourExecutablePath', =>
-      @executablePath = atom.config.get 'linter-harbour.harbourExecutablePath'
+      @executablePath = atom.config.get 'linter-harbour.harbourExe'
 
     atom.config.observe 'linter-harbour.harbourIncludes', =>
       @harbourIncludes = atom.config.get 'linter-harbour.harbourIncludes'
