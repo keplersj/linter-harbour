@@ -3,9 +3,9 @@ activate = ->
 
 module.exports =
   config:
-    harbourExe:
-      title: 'EXE harbour'
-      description: 'c:\harbour\bin\harbour.exe or /opt/harbour/bin/harbour'
+    executablePath:
+      title: 'path to harbour executable'
+      description: 'c:\harbour\bin or /opt/harbour/bin'
       default: ''
       type: 'string'
       order: 1

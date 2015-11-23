@@ -1,14 +1,22 @@
 {
   "name": "linter-harbour",
   "linter-package": true,
-  "main": "./lib/init",
-  "activationCommands": [],
+  "main": "./lib/main",
+  "activationHooks": [
+    "language-harbour:grammar-used"
+  ],
   "version": "4.0.1",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
+  "package-deps": [
+    "linter"
+  ],
+  "dependencies": {
+    "atom-linter": "^3.3.6",
+    "atom-package-deps": "^3.0.5"
+  },
   "engines": {
     "atom": ">=1.2.0"
   },
-  "dependencies": {}
 }
