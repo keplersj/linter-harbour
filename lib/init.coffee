@@ -16,7 +16,7 @@ module.exports =
       type: 'string'
       order: 2
     harbourIncludes:
-      title: 'harbour compiler options'
+      title: 'harbour include options'
       description: 'e.g. /usr/local/include/harbour'
       default: ''
       type: 'string'

@@ -1,23 +1,21 @@
-{exec, child} = require 'child_process'
 linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
-path = require 'path'
-{XRegExp} = require  "#{linterPath}/node_modules/xregexp"
-fs = require 'fs'
+
+# {exec, child} = require 'child_process'
+# path = require 'path'
+# {XRegExp} = require  "#{linterPath}/node_modules/xregexp"
+# fs = require 'fs'
+
 
 class LinterHarbour extends Linter
 
   @syntax: 'source.harbour'
-
-  cmd: 'harbour'
-
+  cmd: 'harbour -n -s -w3 -es1 -q0'
   linterName: 'harbour'
 
   #test.prg(1) Error E0002  Redefinition of procedure or function 'TEST'
   #test.prg(3) Warning W0005  RETURN statement with no return value in function
   regex: '\\((?<line>\\d+)\\) ((?<error>Error)|(?<warning>Warning)) ((?<message>.+))[\\n\\r]'
-
-  regexFlags: ''
 
   # current working directory, overridden in linters that need it
   cwd: null
