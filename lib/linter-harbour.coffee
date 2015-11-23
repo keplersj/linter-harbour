@@ -31,7 +31,7 @@ class LinterHarbour extends Linter
   constructor: (editor) ->
     super(editor)
 
-    atom.config.observe 'linter-harbour.harbourExecutablePath', =>
+    atom.config.observe 'linter-harbour.harbourExe', =>
       @executablePath = atom.config.get 'linter-harbour.harbourExe'
 
     atom.config.observe 'linter-harbour.harbourIncludes', =>
@@ -161,7 +161,7 @@ class LinterHarbour extends Linter
     return @editor.lineLengthForBufferRow( @verifyRowNumber row )
 
   destroy: ->
-    atom.config.unobserve 'linter-harbour.harbourExecutablePath'
+    atom.config.unobserve 'linter-harbour.harbourExe'
     atom.config.unobserve 'linter-harbour.harbourOptions'
     atom.config.unobserve 'linter-harbour.harbourIncludes'
 
