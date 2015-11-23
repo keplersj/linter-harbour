@@ -1,5 +1,4 @@
 {
-
   "name": "linter-harbour",
   "linter-package": true,
   "main": "./lib/init",
