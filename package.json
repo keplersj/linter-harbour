@@ -12,7 +12,7 @@
       }
     }
   },
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Lint harbour, using harbour compiler",
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
