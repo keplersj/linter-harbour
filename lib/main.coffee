@@ -35,6 +35,9 @@ module.exports =
       (executablePath) =>
         @executablePath = executablePath
         @_testBin()
+    @subscriptions.add atom.config.observe 'linter-harbour.additionalArguments',
+      (additionalArguments) =>
+        @additionalArguments = additionalArguments
 
   deactivate: ->
     @subscriptions.dispose()
