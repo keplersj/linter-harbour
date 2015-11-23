@@ -75,6 +75,6 @@ module.exports =
               messages.push
                 type: match[3]
                 filePath: filePath
-                range: helpers.rangeFromLineNumber(textEditor, match[1] - 1)
-                text: match[4]
+                range: helpers.rangeFromLineNumber(textEditor, match[2] - 1)
+                text: match[4] + ': ' + match[5]
             messages
