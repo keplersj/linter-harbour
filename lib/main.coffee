@@ -5,7 +5,7 @@ path = require 'path'
 module.exports =
   config:
     additionalArguments:
-      title: 'Additional Arguments for harbour compiler'
+      title: 'Additional arguments for harbour compiler'
       type: 'string'
       default: '-w3 -es1'
     executablePath:
@@ -14,7 +14,7 @@ module.exports =
       default: 'harbour'
 
   _testBin: ->
-    title = 'linter-harbour: Unable to determine PHP version'
+    title = 'linter-harbour: Unable to determine harbour version'
     message = 'Unable to determine the version of "' + @executablePath +
       '", please verify that this is the right path to harbour.'
     try
