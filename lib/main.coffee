@@ -71,7 +71,7 @@ module.exports =
             {stream: 'stderr', cwd: cwd}).then (output) ->
 
             # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
-            # test.prg(8) Error E0020  Incomplete statement or unbalanced delimiters
+            # test.prg(8) Error E0020  Incomplete statement or unbalanced delim
             regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
             messages = []
             console.log 'output:', output
