@@ -15,12 +15,6 @@
     "babel-eslint": "^4.1.5",
     "eslint-config-airbnb": "latest"
   },
-  "package-deps": [
-    "linter"
-  ],
-  "scripts": {
-    "lint": "./node_modules/.bin/coffeelint lib"
-  },
   "providedServices": {
     "linter": {
       "versions": {
