@@ -6,6 +6,8 @@ module.exports =
   config:
     additionalArguments:
       title: 'Additional arguments for harbour compiler'
+      description: 'e.g. -w3 -es1 -i /usr/local/include/harbour ' +\
+       '-i /build/myproj/include'
       type: 'string'
       default: '-w3 -es1'
     executablePath:
