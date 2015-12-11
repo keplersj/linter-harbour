@@ -15,6 +15,9 @@
     "babel-eslint": "^4.1.5",
     "eslint-config-airbnb": "latest"
   },
+  "package-deps": [
+    "linter"
+  ],
   "providedServices": {
     "linter": {
       "versions": {

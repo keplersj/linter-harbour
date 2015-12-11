@@ -32,6 +32,9 @@ module.exports =
 
   activate: ->
     require('atom-package-deps').install()
+    .then ->
+    console.log("All linter-harbour deps are installed, it's good to go")
+
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-harbour.executablePath',
       (executablePath) =>
@@ -40,6 +43,7 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-harbour.additionalArguments',
       (additionalArguments) =>
         @additionalArguments = additionalArguments
+    console.log "linter-harbour activated"
 
   deactivate: ->
     @subscriptions.dispose()
