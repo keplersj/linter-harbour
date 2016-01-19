@@ -77,7 +77,7 @@ module.exports =
             '-q0',
             @additionalArguments.split(' ')...
           ].filter((e) -> e)
-          console.log "command:", command, "cmd-params:", params
+          #console.log "command:", command, "cmd-params:", params
           return helpers.exec(command, params, { cwd: cwd }).catch (output) ->
             #console.log "stderr output:", output
             # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
@@ -86,11 +86,11 @@ module.exports =
             returnMessages = []
             #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
-              console.log "match:", match
+              #console.log "match:", match
               returnMessages.push
                 type: match[3]
                 filePath: filePath
                 range: helpers.rangeFromLineNumber(textEditor, match[2] - 1)
                 text: match[4] + ': ' + match[5]
-            console.log "return", returnMessages
+            #console.log "return", returnMessages
             returnMessages
