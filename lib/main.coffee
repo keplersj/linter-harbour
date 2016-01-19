@@ -33,7 +33,7 @@ module.exports =
   activate: ->
     require('atom-package-deps').install()
     .then ->
-    console.log("All linter-harbour deps are installed, it's good to go")
+    console.log("All linter-harbour deps are installed :)")
 
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-harbour.executablePath',
@@ -55,6 +55,7 @@ module.exports =
       scope: 'file'
       lintOnFly: false
       lint: (textEditor) =>
+        console.log 'lint harbour start'
         filePath = textEditor.getPath()
         cwd = path.dirname(filePath)
         command = @executablePath
