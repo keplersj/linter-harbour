@@ -1,6 +1,7 @@
 {CompositeDisposable} = require 'atom'
 {exec, tempFile} = helpers = require('atom-linter')
 path = require 'path'
+ExePath = require('./util/exepath')
 
 module.exports =
   config:
@@ -20,6 +21,8 @@ module.exports =
     message = 'Unable to determine the version of "' + @executablePath +
       '", please verify that this is the right path to harbour.'
     try
+      exePath = new ExePath()
+      @executablePath = exePath.full(@executablePath)
       helpers.exec(@executablePath, ['--version']).then (output) =>
         # Harbour 3.2.0dev (r1408271619)
         regex = /Harbour (\d+.*) /g
@@ -33,7 +36,7 @@ module.exports =
   activate: ->
     require('atom-package-deps').install()
     .then ->
-    console.log("All linter-harbour deps are installed, it's good to go")
+    console.log("All linter-harbour deps are installed :)")
 
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-harbour.executablePath',
@@ -55,15 +58,18 @@ module.exports =
       scope: 'file'
       lintOnFly: false
       lint: (textEditor) =>
+        console.log "linter-harbour start"
         filePath = textEditor.getPath()
         cwd = path.dirname(filePath)
         command = @executablePath
+        console.log "command:", command
         return Promise.resolve([]) unless command?
         parameters = []
         parameters.push('-n', '-s', )
         text = textEditor.getText()
-
+        console.log "text:", text
         tempFile path.basename(filePath), text, (tmpFilePath) =>
+          console.log "filePath:", filePath, "tmpFilePath:", tmpFilePath
           params = [
             tmpFilePath,
             '-n',
@@ -71,9 +77,10 @@ module.exports =
             '-q0',
             @additionalArguments.split(' ')...
           ].filter((e) -> e)
+          console.log "params:", params
           return helpers.exec(command, params, \
             {stream: 'stderr', cwd: cwd}).then (output) ->
-
+            console.log "command:", command, "stderr output:", output
             # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
             # test.prg(8) Error E0020  Incomplete statement or unbalanced delim
             regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g

@@ -6,6 +6,7 @@
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
   "dependencies": {
+    "fs-plus": "*",
     "atom-linter": "^4.1.1",
     "atom-package-deps": "^3.0.5"
   },
