@@ -1,18 +1,18 @@
 {
   "name": "linter-harbour",
   "main": "./lib/main",
-  "version": "6.2.1",
+  "version": "6.2.3",
   "description": "Lint harbour on the fly, using harbour -n -s -w3 -es1 -q0",
   "repository": "https://github.com/AtomLinter/linter-harbour",
   "license": "MIT",
   "dependencies": {
     "fs-plus": "*",
-    "atom-linter": "^4.1.1",
-    "atom-package-deps": "^3.0.5"
+    "atom-linter": "^4.3.1",
+    "atom-package-deps": "^3.0.7"
   },
   "devDependencies": {
     "coffeelint": "^1.14.0",
-    "eslint": "^1.9.0",
+    "eslint": "^1.10.3",
     "babel-eslint": "^4.1.5",
     "eslint-config-airbnb": "latest"
   },

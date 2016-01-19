@@ -56,20 +56,20 @@ module.exports =
       name: 'harbour'
       grammarScopes: [ 'source.harbour' ]
       scope: 'file'
-      lintOnFly: false
+      lintOnFly: yes
       lint: (textEditor) =>
         console.log "linter-harbour start"
         filePath = textEditor.getPath()
         cwd = path.dirname(filePath)
         command = @executablePath
-        console.log "command:", command
+        #console.log "command:", command
         return Promise.resolve([]) unless command?
         parameters = []
         parameters.push('-n', '-s', )
         text = textEditor.getText()
-        console.log "text:", text
+        #console.log "text:", text
         tempFile path.basename(filePath), text, (tmpFilePath) =>
-          console.log "filePath:", filePath, "tmpFilePath:", tmpFilePath
+          #console.log "filePath:", filePath, "tmpFilePath:", tmpFilePath
           params = [
             tmpFilePath,
             '-n',
@@ -77,19 +77,20 @@ module.exports =
             '-q0',
             @additionalArguments.split(' ')...
           ].filter((e) -> e)
-          console.log "params:", params
-          return helpers.exec(command, params, \
-            {stream: 'stderr', cwd: cwd}).then (output) ->
-            console.log "command:", command, "stderr output:", output
+          console.log "command:", command, "cmd-params:", params
+          return helpers.exec(command, params, { cwd: cwd }).catch (output) ->
+            #console.log "stderr output:", output
             # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
             # test.prg(8) Error E0020  Incomplete statement or unbalanced delim
             regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
-            messages = []
+            returnMessages = []
             #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
-              messages.push
+              console.log "match:", match
+              returnMessages.push
                 type: match[3]
                 filePath: filePath
                 range: helpers.rangeFromLineNumber(textEditor, match[2] - 1)
                 text: match[4] + ': ' + match[5]
-            messages
+            console.log "return", returnMessages
+            returnMessages
