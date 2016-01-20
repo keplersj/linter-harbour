@@ -58,7 +58,7 @@ module.exports =
       scope: 'file'
       lintOnFly: yes
       lint: (textEditor) =>
-        console.log "linter-harbour start"
+        #console.log "linter-harbour start"
         filePath = textEditor.getPath()
         cwd = path.dirname(filePath)
         command = @executablePath
@@ -86,8 +86,13 @@ module.exports =
             returnMessages = []
             #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
-              #console.log "match:", match
-              range = Math.min[ helpers.rangeFromLineNumber(textEditor, match[2] - 1), textEditor.getLineCount() ]
+              #console.log "match:", match, "range", helpers.rangeFromLineNumber(textEditor, match[2] - 1), "line count:", textEditor.getLineCount()
+              try range = helpers.rangeFromLineNumber(textEditor, match[2] - 1)
+              catch e then console.log e
+              finally
+                range[0][0] = Math.min( range[0][0], textEditor.getLineCount()-1)
+                range[1][0] = Math.min( range[1][0], textEditor.getLineCount()-1)
+
               returnMessages.push
                 type: match[3]
                 filePath: filePath
