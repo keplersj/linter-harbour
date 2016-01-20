@@ -87,10 +87,11 @@ module.exports =
             #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
               #console.log "match:", match
+              range = Math.min[ helpers.rangeFromLineNumber(textEditor, match[2] - 1), textEditor.getLineCount() ]
               returnMessages.push
                 type: match[3]
                 filePath: filePath
-                range: helpers.rangeFromLineNumber(textEditor, match[2] - 1)
+                range: range
                 text: match[4] + ': ' + match[5]
             #console.log "return", returnMessages
             returnMessages
