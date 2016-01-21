@@ -95,7 +95,7 @@ module.exports =
                   range: range
                   text: match[4] + ': ' + match[5]
               catch e
-                then console.log e
+                console.log e
               #finally
               #  range[0][0] = Math.min( range[0][0], textEditor.getLineCount()-1)
               #  range[1][0] = Math.min( range[1][0], textEditor.getLineCount()-1)
