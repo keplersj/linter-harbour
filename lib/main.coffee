@@ -87,16 +87,18 @@ module.exports =
             #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
               #console.log "match:", match, "range", helpers.rangeFromLineNumber(textEditor, match[2] - 1), "line count:", textEditor.getLineCount()
-              try range = helpers.rangeFromLineNumber(textEditor, match[2] - 1)
-              catch e then console.log e
-              finally
-                range[0][0] = Math.min( range[0][0], textEditor.getLineCount()-1)
-                range[1][0] = Math.min( range[1][0], textEditor.getLineCount()-1)
+              try
+                range = helpers.rangeFromLineNumber(textEditor, match[2] - 1)
+                returnMessages.push
+                  type: match[3]
+                  filePath: filePath
+                  range: range
+                  text: match[4] + ': ' + match[5]
+              catch e
+                then console.log e
+              #finally
+              #  range[0][0] = Math.min( range[0][0], textEditor.getLineCount()-1)
+              #  range[1][0] = Math.min( range[1][0], textEditor.getLineCount()-1)
 
-              returnMessages.push
-                type: match[3]
-                filePath: filePath
-                range: range
-                text: match[4] + ': ' + match[5]
             #console.log "return", returnMessages
             returnMessages
