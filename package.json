@@ -13,7 +13,7 @@
   "devDependencies": {
     "coffeelint": "^1.14.0",
     "eslint": "^1.10.3",
-    "babel-eslint": "^4.1.7",
+    "babel-eslint": "^4.1.8",
     "eslint-config-airbnb": "latest"
   },
   "package-deps": [
