@@ -78,7 +78,7 @@ module.exports =
             @additionalArguments.split(' ')...
           ].filter((e) -> e)
           #console.log "command:", command, "cmd-params:", params
-          return helpers.exec(command, params, { cwd: cwd }).catch (output) ->
+          return helpers.exec(command, params, {cwd: cwd}).catch (output) ->
             #console.log "stderr output:", output
             # test.prg(3) Error E0030  Syntax error "syntax error at '?'"
             # test.prg(8) Error E0020  Incomplete statement or unbalanced delim
@@ -86,7 +86,9 @@ module.exports =
             returnMessages = []
             #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
-              #console.log "match:", match, "range", helpers.rangeFromLineNumber(textEditor, match[2] - 1), "line count:", textEditor.getLineCount()
+              # console.log "match:", match, "range",
+              # helpers.rangeFromLineNumber(textEditor, match[2] - 1),
+              # "line count:", textEditor.getLineCount()
               try
                 range = helpers.rangeFromLineNumber(textEditor, match[2] - 1)
                 returnMessages.push
