@@ -1,5 +1,18 @@
 # Change Log
 
+## [v6.6.1](https://github.com/AtomLinter/linter-harbour/tree/v6.6.1) (2017-01-17)
+[Full Changelog](https://github.com/AtomLinter/linter-harbour/compare/v6.6.0...v6.6.1)
+
+**Implemented enhancements:**
+
+- fs-plus@2.9.3 untested ⚠️ [\#53](https://github.com/AtomLinter/linter-harbour/pull/53) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))
+- Update atom-linter to version 8.0.0 🚀 [\#48](https://github.com/AtomLinter/linter-harbour/pull/48) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))
+
+**Fixed bugs:**
+
+- Upcoming linter changes [\#4](https://github.com/AtomLinter/linter-harbour/issues/4)
+- cleaning error array messages when all is ok, updated to version 6.6.1 [\#55](https://github.com/AtomLinter/linter-harbour/pull/55) ([danielgarciagil](https://github.com/danielgarciagil))
+
 ## [v6.6.0](https://github.com/AtomLinter/linter-harbour/tree/v6.6.0) (2016-05-09)
 [Full Changelog](https://github.com/AtomLinter/linter-harbour/compare/v6.5.2...v6.6.0)
 
