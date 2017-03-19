@@ -58,18 +58,14 @@ module.exports =
       scope: 'file'
       lintOnFly: yes
       lint: (textEditor) =>
-        #console.log "linter-harbour start"
         filePath = textEditor.getPath()
         cwd = path.dirname(filePath)
         command = @executablePath
-        #console.log "command:", command
         return Promise.resolve([]) unless command?
         parameters = []
         parameters.push('-n', '-s', )
         text = textEditor.getText()
-        #console.log "text:", text
         tempFile path.basename(filePath), text, (tmpFilePath) =>
-          #console.log "filePath:", filePath, "tmpFilePath:", tmpFilePath
           params = [
             tmpFilePath,
             '-n',
@@ -77,7 +73,6 @@ module.exports =
             '-q0',
             @additionalArguments.split(' ')...
           ].filter((e) -> e)
-          #console.log "command:", command, "cmd-params:", params
           return helpers.exec(command, params, {cwd: cwd}).then (output) ->
             return []
           .catch (output) ->
@@ -86,11 +81,7 @@ module.exports =
             # test.prg(8) Error E0020  Incomplete statement or unbalanced delim
             regex = /([\w\.]+)\((\d+)\) (Error|Warning) ([\w\d]+) (.+)/g
             returnMessages = []
-            #console.log 'output:', output
             while((match = regex.exec(output)) isnt null)
-              # console.log "match:", match, "range",
-              # helpers.rangeFromLineNumber(textEditor, match[2] - 1),
-              # "line count:", textEditor.getLineCount()
               try
                 range = helpers.generateRange(textEditor, match[2] - 1)
                 returnMessages.push
@@ -100,9 +91,4 @@ module.exports =
                   text: match[4] + ': ' + match[5]
               catch e
                 console.log e
-              #finally
-              #  range[0][0] = Math.min( range[0][0], textEditor.getLineCount()-1)
-              #  range[1][0] = Math.min( range[1][0], textEditor.getLineCount()-1)
-
-            #console.log "return", returnMessages
             returnMessages
