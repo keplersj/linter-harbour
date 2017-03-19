@@ -1,6 +1,14 @@
 # Change Log
 
-## [v6.6.1](https://github.com/AtomLinter/linter-harbour/tree/v6.6.1) (2017-01-17)
+## [v6.6.2](https://github.com/AtomLinter/linter-harbour/tree/v6.6.2) (2017-03-18)
+[Full Changelog](https://github.com/AtomLinter/linter-harbour/compare/v6.6.1...v6.6.2)
+
+**Implemented enhancements:**
+
+- Update fs-plus to the latest version 🚀 [\#58](https://github.com/AtomLinter/linter-harbour/pull/58) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update atom-linter to the latest version 🚀 [\#57](https://github.com/AtomLinter/linter-harbour/pull/57) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+
+## [v6.6.1](https://github.com/AtomLinter/linter-harbour/tree/v6.6.1) (2017-01-18)
 [Full Changelog](https://github.com/AtomLinter/linter-harbour/compare/v6.6.0...v6.6.1)
 
 **Implemented enhancements:**
